@@ -1,27 +1,12 @@
-<?php 
-$endpoint = 'https://www.strava.com/api/v3/athlete';
+<?php
+
+require dirname(__DIR__, 1) . '/includes/classes/curl/CurlSettings.php';
 
 $authToken = '86e487c768c0ce1630788d5f1ce1af11045ca2f4';
 
-$params = array('postId' => '1');
-// $result = file_get_contents($url);
+$getAthlete = new CurlSettings('/athlete', array(
+    'Content-Type: application/json', 'Authorization: Bearer ' . $authToken));
 
-$url = $endpoint . '?' . http_build_query($params);
+$getAthlete->curlInit();
 
-$curlInit = curl_init();
-
-curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, true);
-
-curl_setopt($curlInit, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json',
-    'Authorization: Bearer ' . $authToken
-));
-
-curl_setopt($curlInit, CURLOPT_URL, $url);
-
-$result = curl_exec($curlInit);
-
-curl_close($curlInit);
-
-echo $result;
 ?>
