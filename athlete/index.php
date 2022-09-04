@@ -1,9 +1,7 @@
 <?php 
+$endpoint = 'https://www.strava.com/api/v3/athlete';
 
-// https://stackoverflow.com/questions/16700960/how-to-use-curl-to-get-json-data-and-decode-the-data
-
-$endpoint = 'https://jsonplaceholder.typicode.com/comments';
-
+$authToken = '86e487c768c0ce1630788d5f1ce1af11045ca2f4';
 
 $params = array('postId' => '1');
 // $result = file_get_contents($url);
@@ -14,6 +12,11 @@ $curlInit = curl_init();
 
 curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, true);
 
+curl_setopt($curlInit, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json',
+    'Authorization: Bearer ' . $authToken
+));
+
 curl_setopt($curlInit, CURLOPT_URL, $url);
 
 $result = curl_exec($curlInit);
@@ -21,5 +24,4 @@ $result = curl_exec($curlInit);
 curl_close($curlInit);
 
 echo $result;
-
 ?>
