@@ -1,5 +1,5 @@
 <?php 
-
+header("Access-Control-Allow-Origin: *");
 // https://stackoverflow.com/questions/16700960/how-to-use-curl-to-get-json-data-and-decode-the-data
 
 $endpoint = 'https://jsonplaceholder.typicode.com/comments';

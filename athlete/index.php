@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 
 require dirname(__DIR__, 1) . '/includes/classes/curl/CurlSettings.php';
 
