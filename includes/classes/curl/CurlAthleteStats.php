@@ -10,12 +10,12 @@ class CurlAthleteStats extends CurlSettings {
 
     private function curlAthleteStats() {
         $stravaApiCallJson = $this->curlInit();
-        $athleteStatsJsonDecode = json_decode($stravaApiCallJson, true);
-        $athleteStatsJsonDecodeKeys = array_keys($athleteStatsJsonDecode);
+        $stravaApiCallDecode = json_decode($stravaApiCallJson, true);
+        $stravaApiCallDecodeKeys = array_keys($stravaApiCallDecode);
 
-        foreach($athleteStatsJsonDecodeKeys as $key) {
-            if (gettype($athleteStatsJsonDecode[$key]) === 'array' && !str_starts_with($key, 'recent')) {
-                $this->setAthleteStats($key, $athleteStatsJsonDecode);
+        foreach($stravaApiCallDecodeKeys as $key) {
+            if (gettype($stravaApiCallDecode[$key]) === 'array' && !str_starts_with($key, 'recent')) {
+                $this->setAthleteStats($key, $stravaApiCallDecode);
             };
         }
     }
