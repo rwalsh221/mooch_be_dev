@@ -7,14 +7,14 @@ class CurlAthlete extends CurlSettings {
 
     private function setAthleteInfo() {
         $stravaApiCall = $this->curlInit();
-        $athleteJson = json_decode($stravaApiCall, true);
-        $athleteJsonKeys = array_keys($athleteJson);
+        $athleteJsonDecode = json_decode($stravaApiCall, true);
+        $athleteJsonDecodeKeys = array_keys($athleteJsonDecode);
 
-        foreach($athleteJsonKeys as $key) {
+        foreach($athleteJsonDecodeKeys as $key) {
             if($key === 'firstname' 
             || $key === 'lastname' 
             || $key === 'profile_medium') {
-                $this->athleteInfo[$key] = $athleteJson[$key];
+                $this->athleteInfo[$key] = $athleteJsonDecode[$key];
             }
         };
         echo json_encode($this->athleteInfo, JSON_UNESCAPED_SLASHES);
