@@ -8,7 +8,7 @@ class CurlSettings {
         $this->headers = $headers;
     }
 
-    public function curlInit() {
+    protected function curlInit() {
         $curlInit = curl_init();
 
         curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, true);
@@ -22,7 +22,7 @@ class CurlSettings {
 
         curl_close($curlInit);
 
-        echo $result;
+        return $result;
     }
 }
 ?>
