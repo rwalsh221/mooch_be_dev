@@ -22,7 +22,8 @@ class CurlAthleteStats extends CurlSettings {
 
     public function getAthleteStats() {
         $this->curlAthleteStats();
-        echo json_encode($this->athleteStats);
+        // echo json_encode($this->athleteStats);
+        return $this->athleteStats;
    }
 }
 ?>
