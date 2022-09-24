@@ -2,12 +2,22 @@
 header("Access-Control-Allow-Origin: *");
 
 require dirname(__DIR__, 1) . '/includes/classes/curl/CurlAthlete.php';
+require dirname(__DIR__, 1) . '/includes/classes/database/DatabaseAthlete.php';
 
-$authToken = '294def39c971838b61602ebe3cc61f04d52c5ade';
 
-$getAthlete = new CurlAthlete('/athlete', array(
-    'Content-Type: application/json', 'Authorization: Bearer ' . $authToken));
+// $authToken = 'c2efce4749fc617895b3394ed965089b38c6937b';
 
-$getAthlete->getAthlete();
+// $getAthlete = new CurlAthlete('/athlete', array(
+//     'Content-Type: application/json', 'Authorization: Bearer ' . $authToken));
+
+// $getAthlete->getAthlete();
+
+$userId = $_GET['userId'];
+
+$databaseConnection = new DatabaseAthlete();
+
+$userInfo = $databaseConnection->getAthlete($userId);
+
+echo json_encode($userInfo);
 
 ?>

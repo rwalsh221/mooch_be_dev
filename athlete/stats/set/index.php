@@ -18,11 +18,11 @@ $authToken = 'c2efce4749fc617895b3394ed965089b38c6937b';
 $getAthlete = new CurlAthleteStats('athletes/17138502/stats', array(
     'Content-Type: application/json', 'Authorization: Bearer ' . $authToken));
 
-$dataBaseConnection = new DatabaseAthlete();
+$databaseConnection = new DatabaseAthlete();
 
 $athleteStats = $getAthlete->getAthleteStats();
 var_dump($athleteStats);
 
-$dataBaseConnection->insertAthleteStats($userId, $athleteStats);
+$databaseConnection->insertAthleteStats($userId, $athleteStats);
 
 ?>
