@@ -10,8 +10,15 @@ class DatabaseAthlete extends DatabaseSettings {
         return $dbResult;
 }
 
-    public function setAthlete() {
+    public function registerAthlete($userId, $firstName, $lastName, $profileImgUrl, 
+    $tokenExpiresAt, $tokenExpiresIn, $accessToken, $refreshToken) {
+        $sql = "INSERT INTO athlete (userId, firstName, lastName, unitPreference, profileImgUrl, tokenExpiresAt, tokenExpiresIn, accessToken, refreshToken)
+        VALUES ('$userId', '$firstName', '$lastName', 'kilometre', '$profileImgUrl', '$tokenExpiresAt', '$tokenExpiresIn', '$accessToken', '$refreshToken')";
 
+        // $sql = "INSERT athlete (userId)
+        // VALUES ($userId)";
+
+        $this->insertIntoDatabase($sql);
     }
 
     public function getAthleteStats($userId) {

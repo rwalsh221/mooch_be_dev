@@ -1,5 +1,6 @@
 <?php 
-class CurlSettings {
+class CurlSettings
+{
     private $baseUrl = 'https://www.strava.com/api/v3/';
 
     public function __construct($urlEndpoint, $headers)
@@ -8,12 +9,15 @@ class CurlSettings {
         $this->headers = $headers;
     }
 
-    protected function curlInit() {
+    protected function curlInit()
+    {
         $curlInit = curl_init();
 
         curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, true);
 
-        if (count($this->headers) !== 0) {curl_setopt($curlInit, CURLOPT_HTTPHEADER, $this->headers);}
+        if (count($this->headers) !== 0) {
+            curl_setopt($curlInit, CURLOPT_HTTPHEADER, $this->headers);
+        }
 
 
         curl_setopt($curlInit, CURLOPT_URL, $this->baseUrl . $this->urlEndpoint);
@@ -25,4 +29,6 @@ class CurlSettings {
         return $result;
     }
 }
+
+    
 ?>
