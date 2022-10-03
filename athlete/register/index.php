@@ -9,8 +9,8 @@ $data = json_decode($body, true);
 
 $databaseAthlete = new DatabaseAthlete();
 
-$databaseAthlete->registerAthlete($data['userId'],$data['athlete']['id'], $data['athlete']['firstname'],$data['athlete']['lastname'], $data['athlete']['profile_medium'], 
-$data['expires_at'], $data['expires_in'], $data['access_token'], $data['refresh_token']);
+$databaseAthlete->registerAthlete($data['userId'] ,$data['email'] ,$data['athlete']['id'], $data['athlete']['firstname'],$data['athlete']['lastname'], $data['athlete']['profile_medium'], 
+$data['expires_at'], $data['expires_in'], $data['clientId'], $data['clientSecret'], $data['access_token'], $data['refresh_token']);
 
 $getAthleteStats = new CurlAthleteStats('athletes/' . $data['athlete']['id'] . '/stats', array(
     'Content-Type: application/json', 'Authorization: Bearer ' . $data['access_token']));

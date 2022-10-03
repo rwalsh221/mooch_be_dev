@@ -10,10 +10,10 @@ class DatabaseAthlete extends DatabaseSettings {
         return $dbResult;
 }
 
-    public function registerAthlete($userId, $stravaAthleteId, $firstName, $lastName, $profileImgUrl, 
-    $tokenExpiresAt, $tokenExpiresIn, $accessToken, $refreshToken) {
-        $sql = "INSERT INTO athlete (userId, stravaAthleteId, firstName, lastName, unitPreference, profileImgUrl, tokenExpiresAt, tokenExpiresIn, accessToken, refreshToken)
-        VALUES ('$userId', '$stravaAthleteId', '$firstName', '$lastName', 'kilometre', '$profileImgUrl', '$tokenExpiresAt', '$tokenExpiresIn', '$accessToken', '$refreshToken')";
+    public function registerAthlete($userId, $userEmail, $stravaAthleteId, $firstName, $lastName, $profileImgUrl, 
+    $tokenExpiresAt, $tokenExpiresIn, $stravaClientId, $stravaClientSecret, $accessToken, $refreshToken) {
+        $sql = "INSERT INTO athlete (userId, userEmail, stravaAthleteId, firstName, lastName, unitPreference, profileImgUrl, tokenExpiresAt, tokenExpiresIn, stravaClientId, stravaClientSecret, accessToken, refreshToken)
+        VALUES ('$userId', '$userEmail' ,'$stravaAthleteId', '$firstName', '$lastName', 'kilometre', '$profileImgUrl', '$tokenExpiresAt', '$tokenExpiresIn', '$stravaClientId', '$stravaClientSecret', '$accessToken', '$refreshToken')";
 
         // $sql = "INSERT athlete (userId)
         // VALUES ($userId)";
