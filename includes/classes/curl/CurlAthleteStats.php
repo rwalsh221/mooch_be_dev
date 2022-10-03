@@ -4,8 +4,8 @@ require_once("CurlSettings.php");
 class CurlAthleteStats extends CurlSettings {
     private $athleteStats = array();
     
-    private function setAthleteStats($key, $athleteStatsArray) {
-        $this->athleteStats[$key] = $athleteStatsArray[$key]['distance'];
+    private function setAthleteStats($activityType, $athleteStatsArray) {
+        $this->athleteStats[$activityType] = $athleteStatsArray[$activityType]['distance'];
     }
 
     private function curlAthleteStats() {

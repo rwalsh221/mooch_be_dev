@@ -1,8 +1,6 @@
 <?php 
 
-
-class CurlRegisterAthlete
-{
+class CurlRegisterAthlete {
     public function __construct($clientId, $clientSecret, $authCode)
     {
         $this->clientId = $clientId;
@@ -10,11 +8,8 @@ class CurlRegisterAthlete
         $this->authCode = $authCode;
     }
 
-    
-
-    public function curlPost()
+    public function getTokenReadAll()
     {
-
         $postArray = [
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,

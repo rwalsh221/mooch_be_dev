@@ -7,6 +7,7 @@ class CurlAthlete extends CurlSettings {
 
     private function setAthleteInfo() {
         $stravaApiCall = $this->curlInit();
+        // var_dump($stravaApiCall);
         $stravaApiCallDecode = json_decode($stravaApiCall, true);
         $stravaApiCallDecodeKeys = array_keys($stravaApiCallDecode);
 
