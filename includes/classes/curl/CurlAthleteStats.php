@@ -10,6 +10,7 @@ class CurlAthleteStats extends CurlSettings {
 
     private function curlAthleteStats() {
         $stravaApiCallJson = $this->curlInit();
+        
         $stravaApiCallDecode = json_decode($stravaApiCallJson, true);
         $stravaApiCallDecodeKeys = array_keys($stravaApiCallDecode);
 

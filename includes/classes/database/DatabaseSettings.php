@@ -56,6 +56,11 @@ class DatabaseSettings {
 
     }
 
+    protected function getOneColum($tableName, $columName, $userId ) {
+        $sql = "SELECT $columName FROM $tableName WHERE userId='$userId'";
+        return $this->getFromDatabase($sql);
+    }
+
     
 }
 ?>

@@ -21,6 +21,7 @@ $userId = $_GET['userId'];
 $databaseConnection = new DatabaseAthlete();
 
 $athleteStats = $databaseConnection->getAthleteStats($userId);
+
 // echo $athleteStats;
 echo json_encode($athleteStats);
 

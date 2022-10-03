@@ -15,10 +15,7 @@ class DatabaseAthlete extends DatabaseSettings {
         $sql = "INSERT INTO athlete (userId, userEmail, stravaAthleteId, firstName, lastName, unitPreference, profileImgUrl, tokenExpiresAt, tokenExpiresIn, stravaClientId, stravaClientSecret, accessToken, refreshToken)
         VALUES ('$userId', '$userEmail' ,'$stravaAthleteId', '$firstName', '$lastName', 'kilometre', '$profileImgUrl', '$tokenExpiresAt', '$tokenExpiresIn', '$stravaClientId', '$stravaClientSecret', '$accessToken', '$refreshToken')";
 
-        // $sql = "INSERT athlete (userId)
-        // VALUES ($userId)";
-
-        $this->insertIntoDatabase($sql);
+    $this->insertIntoDatabase($sql);
     }
 
     public function getAthleteStats($userId) {
@@ -38,7 +35,7 @@ class DatabaseAthlete extends DatabaseSettings {
 
     public function insertAthleteStats($userId, $athleteStats) {
         // PHP ASSOC ARRAY DESTRUCTURING
-        echo json_decode($userId);
+        
         ['all_ride_totals'=>$all_ride_totals, 'ytd_ride_totals'=>$ytd_ride_totals,
         'all_run_totals'=>$all_run_totals, 'ytd_run_totals'=>$ytd_run_totals,
         'all_swim_totals'=>$all_swim_totals, 'ytd_swim_totals'=>$ytd_swim_totals] = $athleteStats;
@@ -46,9 +43,7 @@ class DatabaseAthlete extends DatabaseSettings {
         // $userRowIsSet = $this->getAthleteStats($userId);
         
         // if($userRowIsSet) {
-        //     $sql = "UPDATE athleteStats SET rideAllTimeDist = $all_ride_totals, rideYearDist = $ytd_ride_totals,
-        //      runAllTimeDist = $all_run_totals, runYearDist = $ytd_run_totals, 
-        //      swimAllTimeDist = $all_swim_totals, swimYearDist = $ytd_swim_totals WHERE userId=$userId";
+        //     
         // } else {
         //     $sql = "INSERT INTO athleteStats (userId, rideAllTimeDist, rideYearDist, runAllTimeDist, runYearDist, swimAllTimeDist, swimYearDist)
         //     VALUES ($userId, $all_ride_totals, $ytd_ride_totals, $all_run_totals, $ytd_run_totals, $all_swim_totals, $ytd_swim_totals)";
@@ -60,6 +55,19 @@ class DatabaseAthlete extends DatabaseSettings {
         $this->insertIntoDatabase($sql);
     }
 
+    public function updateAthleteStats($userId, $athleteStats) {
+        ['all_ride_totals'=>$all_ride_totals, 'ytd_ride_totals'=>$ytd_ride_totals,
+        'all_run_totals'=>$all_run_totals, 'ytd_run_totals'=>$ytd_run_totals,
+        'all_swim_totals'=>$all_swim_totals, 'ytd_swim_totals'=>$ytd_swim_totals] = $athleteStats;
+
+        $sql = "UPDATE athleteStats SET rideAllTimeDist = $all_ride_totals, rideYearDist = $ytd_ride_totals,
+              runAllTimeDist = $all_run_totals, runYearDist = $ytd_run_totals, 
+              swimAllTimeDist = $all_swim_totals, swimYearDist = $ytd_swim_totals WHERE userId='$userId'";
+
+        $this->insertIntoDatabase($sql);
+
+    }
+
     public function test($userId, $athleteStats) {
         ['all_ride_totals'=>$all_ride_totals, 'ytd_ride_totals'=>$ytd_ride_totals,
         'all_run_totals'=>$all_run_totals, 'ytd_run_totals'=>$ytd_run_totals,
@@ -67,5 +75,16 @@ class DatabaseAthlete extends DatabaseSettings {
         echo json_encode($all_ride_totals);
 
     }
+
+    public function getAccessToken ($userId) {
+        $accessToken = $this->getOneColum('athlete', 'accessToken', $userId);
+        return $accessToken[0]['accessToken'];
+    }
+
+    public function getStravaAthleteId($userId) {
+        $stravaAthleteId = $this->getOneColum('athlete', 'stravaAthleteId', $userId); 
+        return $stravaAthleteId[0]['stravaAthleteId'];
+    }
+
 }
 ?>
