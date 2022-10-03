@@ -1,13 +1,38 @@
 <?php 
 class DatabaseSettings {
-    private $servername = 'localhost';
-    private $databaseName = 'mooch';
-    private $username = 'richardmsi';
-    private $password = 'Polly11@Polly11';
+
+    private $servername;
+    private $databaseName;
+    private $username;
+    private $password;
+    private $port;
+
+    private function setDbVar() {
+        if (getenv('DATABASE_URL')) {
+
+            $servername = getenv('DATABASE_URL');
+            $components = parse_url($servername);
+            // var_dump($components);
+            
+            $this->servername = $components['host'];
+            $this->username = $components['user'];
+            $this->password = $components['pass'];
+            $this->databaseName = substr($components['path'], 1);
+            $this->port = $components['port'];
+
+        } else {
+            $this->servername = 'localhost';
+            $this->databaseName = 'mooch';
+            $this->username = 'richardmsi';
+            $this->password = 'Polly11@Polly11';
+            $this->port = 80;
+        }
+    }
 
     public function databaseConnect() {
+        $this->setDbVar();
         try {
-            $dbConn = new PDO("mysql:host=$this->servername;dbname=$this->databaseName", $this->username, $this->password);
+            $dbConn = new PDO("mysql:host=$this->servername:$this->port;dbname=$this->databaseName", $this->username, $this->password);
              // set the PDO error mode to exception
             $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $dbConn;
@@ -18,8 +43,9 @@ class DatabaseSettings {
     }
 
     protected function getFromDatabase($sql) {
+        $this->setDbVar();
         try {
-            $dbConn = new PDO("mysql:host=$this->servername;dbname=$this->databaseName", $this->username, $this->password);
+            $dbConn = new PDO("mysql:host=$this->servername:$this->port;dbname=$this->databaseName", $this->username, $this->password);
              // set the PDO error mode to exception
             $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -38,8 +64,9 @@ class DatabaseSettings {
     }
 
     protected function insertIntoDatabase($sql) {
+        $this->setDbVar();
         try {
-            $dbConn = new PDO("mysql:host=$this->servername;dbname=$this->databaseName", $this->username, $this->password);
+            $dbConn = new PDO("mysql:host=$this->servername:$this->port;dbname=$this->databaseName", $this->username, $this->password);
              // set the PDO error mode to exception
             $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
