@@ -8,8 +8,8 @@ class DatabaseSettings {
     private $port;
 
     private function setDbVar() {
-        $test = getenv('DATABASE_URL');
-        if ($test === false) {
+        $prodDbUrl = getenv('DATABASE_URL');
+        if ($prodDbUrl === false) {
             
             $this->servername = 'localhost';
             $this->databaseName = 'mooch';
