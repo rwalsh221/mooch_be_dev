@@ -86,5 +86,25 @@ class DatabaseAthlete extends DatabaseSettings {
         return $stravaAthleteId[0]['stravaAthleteId'];
     }
 
+    public function getTokenExpiresAt($userId) {
+        $tokenExpiresAt = $this->getOneColum('athlete', 'tokenExpiresAt', $userId);
+        return $tokenExpiresAt[0]['tokenExpiresAt'];
+    }
+
+    public function getClientId($userId) {
+        $tokenExpiresAt = $this->getOneColum('athlete', 'stravClientId', $userId);
+        return $tokenExpiresAt[0]['stravClientId'];
+    }
+
+    public function getClientSecret($userId) {
+        $tokenExpiresAt = $this->getOneColum('athlete', 'stravaClientSecret', $userId);
+        return $tokenExpiresAt[0]['stravaClientSecret'];
+    }
+
+    public function getRefreshToken($userId) {
+        $tokenExpiresAt = $this->getOneColum('athlete', 'refreshToken', $userId);
+        return $tokenExpiresAt[0]['refreshToken'];
+    }
+
 }
 ?>
