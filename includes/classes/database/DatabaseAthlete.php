@@ -11,11 +11,11 @@ class DatabaseAthlete extends DatabaseSettings {
 }
 
     public function registerAthlete($userId, $userEmail, $stravaAthleteId, $firstName, $lastName, $profileImgUrl, 
-    $tokenExpiresAt, $tokenExpiresIn, $stravaClientId, $stravaClientSecret, $accessToken, $refreshToken) {
-        $sql = "INSERT INTO athlete (userId, userEmail, stravaAthleteId, firstName, lastName, unitPreference, profileImgUrl, tokenExpiresAt, tokenExpiresIn, stravaClientId, stravaClientSecret, accessToken, refreshToken)
-        VALUES ('$userId', '$userEmail' ,'$stravaAthleteId', '$firstName', '$lastName', 'kilometre', '$profileImgUrl', '$tokenExpiresAt', '$tokenExpiresIn', '$stravaClientId', '$stravaClientSecret', '$accessToken', '$refreshToken')";
+        $tokenExpiresAt, $tokenExpiresIn, $stravaClientId, $stravaClientSecret, $accessToken, $refreshToken) {
+            $sql = "INSERT INTO athlete (userId, userEmail, stravaAthleteId, firstName, lastName, unitPreference, profileImgUrl, tokenExpiresAt, tokenExpiresIn, stravaClientId, stravaClientSecret, accessToken, refreshToken)
+            VALUES ('$userId', '$userEmail' ,'$stravaAthleteId', '$firstName', '$lastName', 'kilometre', '$profileImgUrl', '$tokenExpiresAt', '$tokenExpiresIn', '$stravaClientId', '$stravaClientSecret', '$accessToken', '$refreshToken')";
 
-    $this->insertIntoDatabase($sql);
+        $this->insertIntoDatabase($sql);
     }
 
     public function getAthleteStats($userId) {
@@ -35,21 +35,10 @@ class DatabaseAthlete extends DatabaseSettings {
 
     public function insertAthleteStats($userId, $athleteStats) {
         // PHP ASSOC ARRAY DESTRUCTURING
-        
         ['all_ride_totals'=>$all_ride_totals, 'ytd_ride_totals'=>$ytd_ride_totals,
         'all_run_totals'=>$all_run_totals, 'ytd_run_totals'=>$ytd_run_totals,
         'all_swim_totals'=>$all_swim_totals, 'ytd_swim_totals'=>$ytd_swim_totals] = $athleteStats;
-        // CAN BE CHNAGED WHEN SIGN UP IS ADDED AS athleteStats WILL BE SET ON SIGN UP
-        // $userRowIsSet = $this->getAthleteStats($userId);
         
-        // if($userRowIsSet) {
-        //     
-        // } else {
-        //     $sql = "INSERT INTO athleteStats (userId, rideAllTimeDist, rideYearDist, runAllTimeDist, runYearDist, swimAllTimeDist, swimYearDist)
-        //     VALUES ($userId, $all_ride_totals, $ytd_ride_totals, $all_run_totals, $ytd_run_totals, $all_swim_totals, $ytd_swim_totals)";
-
-        // }
-        echo json_encode($userId);
         $sql = "INSERT INTO athleteStats (userId, rideAllTimeDist, rideYearDist, runAllTimeDist, runYearDist, swimAllTimeDist, swimYearDist)
                  VALUES ('$userId', $all_ride_totals, $ytd_ride_totals, $all_run_totals, $ytd_run_totals, $all_swim_totals, $ytd_swim_totals)";
         $this->insertIntoDatabase($sql);
