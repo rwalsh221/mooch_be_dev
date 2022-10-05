@@ -92,8 +92,8 @@ class DatabaseAthlete extends DatabaseSettings {
     }
 
     public function getClientId($userId) {
-        $tokenExpiresAt = $this->getOneColum('athlete', 'stravClientId', $userId);
-        return $tokenExpiresAt[0]['stravClientId'];
+        $tokenExpiresAt = $this->getOneColum('athlete', 'stravaClientId', $userId);
+        return $tokenExpiresAt[0]['stravaClientId'];
     }
 
     public function getClientSecret($userId) {
@@ -104,6 +104,14 @@ class DatabaseAthlete extends DatabaseSettings {
     public function getRefreshToken($userId) {
         $tokenExpiresAt = $this->getOneColum('athlete', 'refreshToken', $userId);
         return $tokenExpiresAt[0]['refreshToken'];
+    }
+
+    public function setNewAccessToken($userId, $accessToken, $refreshToken, $tokenExpiresAt, $tokenExpiresIn) {
+        $sql = "UPDATE athlete SET accessToken = '$accessToken', refreshToken = '$refreshToken', tokenExpiresAt = '$tokenExpiresAt', tokenExpiresIn = '$tokenExpiresIn'
+        WHERE userId ='$userId'";
+
+        $this->insertIntoDatabase($sql);
+
     }
 
 }
