@@ -11,8 +11,6 @@ class CurlSettings
 
     protected function curlInit()
     {
-        echo "$this->baseUrl$this->urlEndpoint";
-        echo '<br>';
         $curlInit = curl_init();
 
         curl_setopt($curlInit, CURLOPT_RETURNTRANSFER, true);
