@@ -7,8 +7,8 @@ $userId = $_GET['userId'];
 
 $databaseConnection = new DatabaseSegments();
 
-$userInfo = $databaseConnection->getUserSegments($userId);
+$userSegments = $databaseConnection->getAthleteSegments($userId);
 
-echo json_encode($userInfo);
+echo json_encode($userSegments);
 
 ?>

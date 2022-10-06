@@ -13,7 +13,7 @@ class DatabaseSegments extends DatabaseSettings {
         $sql = "SELECT segmentTime from segmentTimes WHERE segmentId='$segmentId' AND userId='$userId'";
 
         $result = $this->getFromDatabase($sql);
-        var_dump($result[0]['segmentTime']);
+        // var_dump($result[0]['segmentTime']);
     
         if(empty($result)) {
             // INSERT INTO
@@ -31,7 +31,7 @@ class DatabaseSegments extends DatabaseSettings {
         }
     }
 
-    public function getUserSegments($userId) {
+    public function getAthleteSegments($userId) {
         $sql = "SELECT segmentId from segmentTimes WHERE userId='$userId'";
 
         $result = $this->getFromDatabase($sql);
@@ -50,6 +50,24 @@ class DatabaseSegments extends DatabaseSettings {
         }
 
         return $userSegments;
+    }
+
+    public function getSegmentTimes($segmentId) {
+        $sql = "SELECT segmentTime, userId from segmentTimes WHERE segmentId='$segmentId'";
+
+        return $this->getFromDatabase($sql);
+    }
+
+    public function getSegmentAthlete($segmentId) {
+        $sql = "SELECT userId from segmentTimes WHERE segmentId='$segmentId'";
+
+        $userIds = $this->getFromDatabase($sql);
+
+        $userNameArray = array();
+
+        foreach($userIds as $userId) {
+
+        }
     }
 
 }
