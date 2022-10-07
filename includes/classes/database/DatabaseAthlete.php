@@ -8,7 +8,32 @@ class DatabaseAthlete extends DatabaseSettings {
          FROM athlete WHERE userId='$userId'";
         $dbResult = $this->getFromDatabase($sql);
         return $dbResult;
-}
+    }
+
+    public function getAllAthleteNames() {
+        $sql = "SELECT userId, firstName
+        FROM athlete";
+        $dbResult = $this->getFromDatabase($sql);
+        var_dump($dbResult);
+        $athleteNames = array();
+
+        foreach ($dbResult as $dbResultKey) {
+            echo '<br>';
+            var_dump($dbResultKey);
+            echo '<br>';
+            $athleteNames[$dbResultKey["userId"]] = $dbResultKey["firstName"];
+
+        }
+        echo '<br>';
+        echo 'hello';
+        var_dump($athleteNames);
+        echo'<br>';
+        echo $athleteNames["yxTBwLMO05VN7zmYUcjqNdadkkt2"];
+        echo '<br>';
+
+
+        return $dbResult;
+    }
 
     public function registerAthlete($userId, $userEmail, $stravaAthleteId, $firstName, $lastName, $profileImgUrl, 
         $tokenExpiresAt, $tokenExpiresIn, $stravaClientId, $stravaClientSecret, $accessToken, $refreshToken) {

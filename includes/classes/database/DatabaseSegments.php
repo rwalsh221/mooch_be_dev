@@ -70,5 +70,11 @@ class DatabaseSegments extends DatabaseSettings {
         }
     }
 
+    public function getSegmentTimes2($segmentArray) {
+        $segmentTimes = array();
+
+        var_dump($segmentArray);
+    }
+
 }
 ?>
