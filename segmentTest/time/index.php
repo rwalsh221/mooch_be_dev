@@ -30,18 +30,52 @@ $athleteSegements = $databaseSegments->getAthleteSegments($userId);
 // var_dump($databaseSegments->getAthleteSegments($userId));
 echo '<br>';
 
-foreach($athleteSegements as $athleteSegementsKey) {
-    echo'hello';
-    var_dump($athleteSegementsKey);
-    echo 'hello';
-    array_push($testArray, $databaseSegments->getSegmentTimes($athleteSegementsKey[0]['segmentId']));
-    $jsonTest[$athleteSegementsKey[0]["segmentId"]] = [["time"=>"time",
-    "user"=>"user"]];
-}
+// foreach($athleteSegements as $athleteSegementsKey) {
+//     echo'hello';
+//     var_dump($athleteSegementsKey);
+//     echo 'hello';
+//     array_push($testArray, $databaseSegments->getSegmentTimes($athleteSegementsKey[0]['segmentId']));
+//     $jsonTest[$athleteSegementsKey[0]["segmentId"]] = [["time"=>"time",
+//     "user"=>"user"]];
+// }
 echo '<br>';
 // var_dump($testArray);
 // ADDS USER TIME TO DB WORKING
-var_dump($jsonTest)
+// var_dump($jsonTest);
 // var_dump(empty($test));
+$segmentTimes = $databaseSegments->getSegmentTimes3(850707);
+// var_dump($segmentTimes);
 
+$segmentTimesArray = array();
+foreach($athleteSegements as $athleteSegementsKey) {
+// var_dump($athleteSegementsKey[0]['segmentId']);
+// var_dump($test);
+$segmentId = $athleteSegementsKey[0]['segmentId'];
+$segmentTimes = $databaseSegments->getSegmentTimes3($segmentId);
+// WORKING BELOW
+foreach($segmentTimes as $segmentTimesKey) {
+    // var_dump($segmentTimesKey);
+    $time = $segmentTimesKey['segmentTime'];
+    $userId = $segmentTimesKey['userId'];
+    $name = $databaseAthlete->getAthleteName($segmentTimesKey['userId'])[0]['firstName']; // METHOD RETURNS ARRAY FROM DB
+    // var_dump($name);
+    // var_dump($time);
+    $segmentTimesArray["$segmentId"]["$userId"]["name"]=$name;
+    $segmentTimesArray["$segmentId"]["$userId"]["time"]=$time;
+
+}
+}
+
+var_dump($segmentTimesArray);
+
+// 
+// forech (segmenttime from db) {
+    // function getnamefromdb(segmttime[userid])
+
+    // segmtentimearray.pus(uid=>[time=>time
+    // uid=>uid]) 
+// 
+
+// could sort by time in new array with segmentid as key and time as value then pass index into segment time array to get leadboard position.
+// might do leaderboard in js
 ?>

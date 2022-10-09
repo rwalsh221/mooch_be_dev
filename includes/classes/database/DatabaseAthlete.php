@@ -35,6 +35,12 @@ class DatabaseAthlete extends DatabaseSettings {
         return $dbResult;
     }
 
+    public function getAthleteName($userId) {
+        $sql = "SELECT firstName FROM athlete WHERE userId = '$userId'";
+
+        return $this->getFromDatabase($sql);
+    }
+
     public function registerAthlete($userId, $userEmail, $stravaAthleteId, $firstName, $lastName, $profileImgUrl, 
         $tokenExpiresAt, $tokenExpiresIn, $stravaClientId, $stravaClientSecret, $accessToken, $refreshToken) {
             $sql = "INSERT INTO athlete (userId, userEmail, stravaAthleteId, firstName, lastName, unitPreference, profileImgUrl, tokenExpiresAt, tokenExpiresIn, stravaClientId, stravaClientSecret, accessToken, refreshToken)

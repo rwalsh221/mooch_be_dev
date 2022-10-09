@@ -76,5 +76,11 @@ class DatabaseSegments extends DatabaseSettings {
         var_dump($segmentArray);
     }
 
+    public function getSegmentTimes3($segmentId) {
+        $sql = "SELECT segmentTime, userId FROM segmentTimes WHERE segmentId = '$segmentId' ORDER BY segmentTime ASC";
+
+        return $this->getFromDatabase($sql);
+    }
+
 }
 ?>
