@@ -35,7 +35,6 @@ foreach($segmentIdArray as $segmentId) {
     $athleteSegmentTime = $segmentJsonDecode['athlete_segment_stats']['pr_elapsed_time'];
 
    if($athleteSegmentTime === null) {
-    echo 'segment is null';
     continue;
    };
    
@@ -44,7 +43,7 @@ foreach($segmentIdArray as $segmentId) {
 }
 
 foreach($segmentTimeArray as $segmentTimeArrayIndex) {
-    $databaseSegments->updateUserSegementTime($segmentTimeArrayIndex['segmentId'], $userId, $segmentTimeArrayIndex['segmentTime']);
+    $databaseSegments->updateUserSegmentTime($segmentTimeArrayIndex['segmentId'], $userId, $segmentTimeArrayIndex['segmentTime']);
 }
 
 // $userSegments = $databaseConnection->getAthleteSegments($userId);
