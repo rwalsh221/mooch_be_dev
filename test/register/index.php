@@ -1,11 +1,12 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+
 
 require dirname(__DIR__, 2) . '/includes/classes/database/DatabaseAthlete.php';
 require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthleteStats.php';
 require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthleteNewAuthToken.php';
-// require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthleteNewAuthToken.php';
 require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthlete.php';
 
 
@@ -18,7 +19,11 @@ $curlAthleteNewAuthToken = new CurlAthleteNewAuthToken();
 
 $body = file_get_contents('php://input');
 $signUpData = json_decode($body, true);
-var_dump($signUpData);
+// var_dump($signUpData);
+if($signUpData === null) {
+    http_response_code(400);
+    exit;
+}
 
 // 2, request refresh token from strava to get token exipres_in and expires_at. = $tokenData
 
@@ -48,6 +53,6 @@ $athleteProfileData['profile_medium'], $tokenExpiresAt, $tokenExpiresIn, $signUp
 // echo json_encode($athleteStats);
 
 $databaseAthlete->insertAthleteStats($signUpData['uid'], $athleteStatsData);
-
+http_response_code(200);
 
 ?>
