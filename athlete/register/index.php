@@ -9,6 +9,14 @@ $data = json_decode($body, true);
 
 $databaseAthlete = new DatabaseAthlete();
 
+// 1, receive  user UID, client secret, client id, access token, refresh token and email from front end. = $signUpData
+
+// 2, request refresh token from strava to get token exipres_in and expires_at. = $tokenData
+
+// 3, request athlete info from strava to get athleteID, first and last name, profile img, = $athleteData
+
+// 4 send curl request to get ATHLETE STATS FROM STRAVA. = $getAthleteStats
+
 $databaseAthlete->registerAthlete($data['userId'] ,$data['email'] ,$data['athlete']['id'], $data['athlete']['firstname'],$data['athlete']['lastname'], $data['athlete']['profile_medium'], 
 $data['expires_at'], $data['expires_in'], $data['clientId'], $data['clientSecret'], $data['access_token'], $data['refresh_token']);
 
@@ -19,9 +27,5 @@ $athleteStats = $getAthleteStats->getAthleteStats();
 echo json_encode($athleteStats);
 
 $databaseAthlete->insertAthleteStats($data['userId'], $athleteStats);
-// $databaseAthlete->test($data['userId'], $athleteStats);
 
-// $initRegisterAthlete->registerAthlete('test1','test2','test3','test4',1,2,'test7','test8',)
-
-// echo json_encode($data['athlete']['firstname']);
 ?>

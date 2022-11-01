@@ -3,7 +3,7 @@ class CurlSettings
 {
     private $baseUrl = 'https://www.strava.com/api/v3/';
 
-    public function __construct($urlEndpoint, $headers)
+    public function __construct($urlEndpoint = null, $headers = null)
     {
         $this->urlEndpoint = $urlEndpoint;
         $this->headers = $headers;
