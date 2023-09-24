@@ -10,23 +10,27 @@ require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthleteNewAuthToken.ph
 require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthlete.php';
 
 
-
 $databaseAthlete = new DatabaseAthlete();
 $curlAthleteNewAuthToken = new CurlAthleteNewAuthToken();
 
 
 // 1, receive  user UID, client secret, client id, access token, refresh token and email from front end. = $signUpData
+// var_dump( file_get_contents('php://input'));
+// $body = file_get_contents('php://input');
+// var_dump('hello php');
+// var_dump($body);
+// $signUpData = json_decode($body, true);
+// var_dump($signUpData);
+// echo json_last_error_msg();
+// if($signUpData === null) {
+//     echo 'signupdata null';
+//     http_response_code(400);        
+//     exit;
+// }
 
-$body = file_get_contents('php://input');
-var_dump($body);
-$signUpData = json_decode($body, true);
-var_dump($signUpData);
-echo json_last_error_msg();
-if($signUpData === null) {
-    echo 'signupdata null';
-    http_response_code(400);        
-    exit;
-}
+$signUpData = $_GET;
+
+// extract($urlParams, $flags=EXTR_SKIP);
 
 // 2, request refresh token from strava to get token exipres_in and expires_at. = $tokenData
 
