@@ -3,17 +3,25 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 
+
 require dirname(__DIR__, 2) . '/includes/classes/database/DatabaseAthlete.php';
 require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthleteStats.php';
 require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthleteNewAuthToken.php';
 require dirname(__DIR__, 2) . '/includes/classes/curl/CurlAthlete.php';
 
+
 $databaseAthlete = new DatabaseAthlete();
 $curlAthleteNewAuthToken = new CurlAthleteNewAuthToken();
 
-// 1, receive  user UID, client secret, client id, access token, refresh token and email from front end. = $signUpData
-$signUpData = $_GET;
 
+// 1, receive  user UID, client secret, client id, access token, refresh token and email from front end. = $signUpData
+var_dump( file_get_contents('php://input'));
+$body = file_get_contents('php://input');
+var_dump('hello php');
+var_dump($body);
+$signUpData = json_decode($body, true);
+var_dump($signUpData);
+echo json_last_error_msg();
 if($signUpData === null) {
     echo 'signupdata null';
     http_response_code(400);        
